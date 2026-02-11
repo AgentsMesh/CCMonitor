@@ -8,6 +8,16 @@ A native macOS menu bar app for real-time monitoring of [Claude Code](https://do
   <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 </p>
 
+## Screenshots
+
+<p align="center">
+  <img src="demos/dashboard.jpg" width="800" alt="Dashboard">
+</p>
+
+### Menu Bar Demo
+
+https://github.com/AgentsMesh/CCMonitor/raw/main/demos/menubar.mp4
+
 ## Features
 
 - **Real-time Monitoring** — Watches `~/.claude/projects/**/*.jsonl` via FSEvents, processes new entries within seconds
