@@ -1,6 +1,10 @@
-# CCMonitor
+<p align="center">
+  <img src="demos/icon.png" width="128" alt="CCMonitor">
+</p>
 
-A native macOS menu bar app for real-time monitoring of [Claude Code](https://docs.anthropic.com/en/docs/claude-code) token usage and costs.
+<h1 align="center">CCMonitor</h1>
+
+<p align="center">A native macOS menu bar app for real-time monitoring of <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> token usage and costs.</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/platform-macOS%2014%2B-blue" alt="Platform">

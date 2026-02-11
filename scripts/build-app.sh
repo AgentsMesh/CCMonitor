@@ -38,6 +38,13 @@ if [ -n "$RESOURCE_BUNDLE" ]; then
     echo "  ✅ Copied resource bundle"
 fi
 
+# 复制应用图标
+ICON_FILE="Sources/CCMonitor/Resources/AppIcon.icns"
+if [ -f "$ICON_FILE" ]; then
+    cp "$ICON_FILE" "${APP_DIR}/Contents/Resources/AppIcon.icns"
+    echo "  ✅ Copied app icon"
+fi
+
 # 创建 Info.plist
 cat > "${APP_DIR}/Contents/Info.plist" << 'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
@@ -64,6 +71,8 @@ cat > "${APP_DIR}/Contents/Info.plist" << 'PLIST'
     <true/>
     <key>NSHighResolutionCapable</key>
     <true/>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
 </dict>
 </plist>
 PLIST

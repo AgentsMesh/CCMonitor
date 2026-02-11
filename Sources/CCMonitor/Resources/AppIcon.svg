@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <!-- Accent gradient (warm amber/orange for cost/money theme) -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#ef4444"/>
+    </linearGradient>
+    <!-- Chart bar gradient -->
+    <linearGradient id="barGrad1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#60a5fa"/>
+    </linearGradient>
+    <linearGradient id="barGrad2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="barGrad3" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#06b6d4"/>
+      <stop offset="100%" style="stop-color:#22d3ee"/>
+    </linearGradient>
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Drop shadow for the rounded square -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- macOS-style rounded rectangle background -->
+  <rect x="52" y="52" width="920" height="920" rx="207" ry="207" fill="url(#bgGrad)" filter="url(#shadow)"/>
+
+  <!-- Subtle grid pattern overlay -->
+  <g opacity="0.06">
+    <line x1="200" y1="52" x2="200" y2="972" stroke="#fff" stroke-width="1"/>
+    <line x1="350" y1="52" x2="350" y2="972" stroke="#fff" stroke-width="1"/>
+    <line x1="500" y1="52" x2="500" y2="972" stroke="#fff" stroke-width="1"/>
+    <line x1="650" y1="52" x2="650" y2="972" stroke="#fff" stroke-width="1"/>
+    <line x1="800" y1="52" x2="800" y2="972" stroke="#fff" stroke-width="1"/>
+    <line x1="52" y1="250" x2="972" y2="250" stroke="#fff" stroke-width="1"/>
+    <line x1="52" y1="400" x2="972" y2="400" stroke="#fff" stroke-width="1"/>
+    <line x1="52" y1="550" x2="972" y2="550" stroke="#fff" stroke-width="1"/>
+    <line x1="52" y1="700" x2="972" y2="700" stroke="#fff" stroke-width="1"/>
+  </g>
+
+  <!-- Chart bars (representing usage monitoring) -->
+  <g filter="url(#softGlow)">
+    <!-- Bar 1 - shortest -->
+    <rect x="230" y="580" width="80" height="200" rx="12" fill="url(#barGrad1)" opacity="0.9"/>
+    <!-- Bar 2 - medium -->
+    <rect x="360" y="460" width="80" height="320" rx="12" fill="url(#barGrad2)" opacity="0.9"/>
+    <!-- Bar 3 - tallest -->
+    <rect x="490" y="340" width="80" height="440" rx="12" fill="url(#barGrad1)" opacity="0.9"/>
+    <!-- Bar 4 - medium-tall -->
+    <rect x="620" y="400" width="80" height="380" rx="12" fill="url(#barGrad3)" opacity="0.9"/>
+    <!-- Bar 5 - medium -->
+    <rect x="750" y="500" width="80" height="280" rx="12" fill="url(#barGrad2)" opacity="0.9"/>
+  </g>
+
+  <!-- Trend line connecting bar tops -->
+  <polyline
+    points="270,570 400,450 530,330 660,390 790,490"
+    fill="none"
+    stroke="url(#accentGrad)"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    filter="url(#glow)"
+    opacity="0.9"
+  />
+
+  <!-- Data points on trend line -->
+  <circle cx="270" cy="570" r="10" fill="#f59e0b" filter="url(#softGlow)"/>
+  <circle cx="400" cy="450" r="10" fill="#f59e0b" filter="url(#softGlow)"/>
+  <circle cx="530" cy="330" r="10" fill="#f59e0b" filter="url(#softGlow)"/>
+  <circle cx="660" cy="390" r="10" fill="#f59e0b" filter="url(#softGlow)"/>
+  <circle cx="790" cy="490" r="10" fill="#f59e0b" filter="url(#softGlow)"/>
+
+  <!-- Dollar sign (cost theme) - top left area -->
+  <g transform="translate(180, 180)" filter="url(#glow)">
+    <text x="0" y="0" font-family="SF Pro Display, -apple-system, Helvetica Neue, Arial, sans-serif" font-size="120" font-weight="700" fill="url(#accentGrad)" dominant-baseline="central" text-anchor="middle" opacity="0.85">$</text>
+  </g>
+
+  <!-- "CC" text - representing Claude Code -->
+  <g filter="url(#softGlow)">
+    <text x="512" y="230" font-family="SF Pro Display, -apple-system, Helvetica Neue, Arial, sans-serif" font-size="160" font-weight="800" fill="#ffffff" text-anchor="middle" dominant-baseline="central" letter-spacing="-4" opacity="0.95">CC</text>
+  </g>
+
+  <!-- Baseline axis line -->
+  <line x1="190" y1="790" x2="870" y2="790" stroke="#ffffff" stroke-width="3" opacity="0.2" stroke-linecap="round"/>
+</svg>
