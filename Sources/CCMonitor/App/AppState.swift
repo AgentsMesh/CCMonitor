@@ -28,7 +28,11 @@ final class AppState {
     private var watcher: FSEventsWatcher?
     private var refreshTask: Task<Void, Never>?
     private var saveTask: Task<Void, Never>?
+    private var processingTask: Task<Void, Never>?
     private var usageStore: UsageStore?
+
+    /// 串行化文件处理队列，防止并发修改 aggregator 导致 crash
+    private var fileChannel: AsyncStream<[String]>.Continuation?
 
     init() {
         startPipeline()
@@ -38,6 +42,8 @@ final class AppState {
         watcher?.stop()
         refreshTask?.cancel()
         saveTask?.cancel()
+        processingTask?.cancel()
+        fileChannel?.finish()
         // 退出时保存状态
         let reader = fileReader
         let agg = aggregator
@@ -79,7 +85,8 @@ final class AppState {
                 return
             }
 
-            // 5. 启动 FSEvents 监控
+            // 5. 启动串行文件处理队列 + FSEvents 监控
+            startFileProcessingQueue()
             startWatcher(paths: projectDirs)
 
             // 6. 启动定时刷新
@@ -160,17 +167,29 @@ final class AppState {
             : "Processed \(processedCount) files, \(totalEntries) new entries"
     }
 
+    /// 启动串行文件处理队列
+    /// 所有对 aggregator 的写入都经过此队列，避免并发修改导致 crash
+    private func startFileProcessingQueue() {
+        let (stream, continuation) = AsyncStream<[String]>.makeStream()
+        self.fileChannel = continuation
+
+        processingTask = Task { @MainActor [weak self] in
+            for await paths in stream {
+                guard let self else { break }
+                for path in paths {
+                    await self.processFile(path)
+                }
+                self.updateViewModels()
+            }
+        }
+    }
+
     /// 启动 FSEvents 监控
     private func startWatcher(paths: [String]) {
         watcher = FSEventsWatcher(paths: paths) { [weak self] changedPaths in
             guard let self else { return }
             Self.logger.debug("🔄 FSEvents: \(changedPaths.count) files changed")
-            Task { @MainActor in
-                for path in changedPaths {
-                    await self.processFile(path)
-                }
-                self.updateViewModels()
-            }
+            self.fileChannel?.yield(changedPaths)
         }
         watcher?.start()
         Self.logger.info("👁️ FSEvents watcher started for \(paths.count) directories")
