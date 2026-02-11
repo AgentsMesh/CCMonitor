@@ -50,8 +50,9 @@ final class AggregatedUsage {
             .flatMap { String(data: $0, encoding: .utf8) } ?? "{}"
     }
 
+    /// token 总量 (input + output，不含 cache)
     var totalTokens: Int {
-        inputTokens + outputTokens + cacheCreationTokens + cacheReadTokens
+        inputTokens + outputTokens
     }
 
     var modelDistribution: [String: Int] {

@@ -23,6 +23,19 @@ enum Formatters {
         return "\(count)"
     }
 
+    /// 格式化 token 分类展示 (e.g., "I:2.1M O:0.8M C:95.2M")
+    static func formatTokenBreakdown(input: Int, output: Int, cacheRead: Int, cacheCreation: Int = 0) -> String {
+        let cache = cacheRead + cacheCreation
+        var parts = [
+            "I:\(formatTokenCountShort(input))",
+            "O:\(formatTokenCountShort(output))"
+        ]
+        if cache > 0 {
+            parts.append("C:\(formatTokenCountShort(cache))")
+        }
+        return parts.joined(separator: " ")
+    }
+
     // MARK: - 金额格式化
 
     private static let currencyFormatter: NumberFormatter = {

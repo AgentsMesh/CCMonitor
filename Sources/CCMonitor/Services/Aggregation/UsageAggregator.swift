@@ -271,7 +271,11 @@ struct UsageSummary: Sendable {
     var requestCount: Int
     var modelDistribution: [String: Int]
 
-    var totalTokens: Int { inputTokens + outputTokens + cacheCreationTokens + cacheReadTokens }
+    /// input + output (不含 cache，展示用)
+    var totalTokens: Int { inputTokens + outputTokens }
+
+    /// cache tokens 合计 (cache_creation + cache_read)
+    var cacheTokens: Int { cacheCreationTokens + cacheReadTokens }
 
     static let empty = UsageSummary(
         inputTokens: 0, outputTokens: 0,

@@ -33,25 +33,25 @@ struct MenuBarView: View {
             }
 
             // 今日摘要
-            HStack(spacing: 16) {
-                VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
                     Text("Cost")
                         .font(.caption)
                         .foregroundStyle(.secondary)
+                    Spacer()
                     Text(Formatters.formatCost(appState.menuBarVM.todayCost))
                         .font(.title2)
                         .fontWeight(.semibold)
                         .monospacedDigit()
                 }
 
-                Spacer()
-
-                VStack(alignment: .trailing) {
+                HStack {
                     Text("Tokens")
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                    Text(Formatters.formatTokenCount(appState.menuBarVM.todayTokens))
-                        .font(.title3)
+                    Spacer()
+                    Text(appState.menuBarVM.todayTokenBreakdown)
+                        .font(.caption)
                         .monospacedDigit()
                 }
             }

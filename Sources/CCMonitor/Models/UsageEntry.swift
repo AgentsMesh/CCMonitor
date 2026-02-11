@@ -49,13 +49,12 @@ struct UsageEntry: Codable, Sendable, Identifiable {
             ?? Formatters.fallbackISO8601(timestamp)
     }
 
-    /// 总 token 数 (输入 + 输出 + 缓存)
+    /// 总 token 数 (input + output，不含 cache)
+    /// cache_read 是从缓存读取的已有 prompt，单价极低（base 的 1/10），
+    /// 计入 totalTokens 会严重膨胀展示数量，与实际成本不匹配
     var totalTokens: Int {
         guard let usage = message.usage else { return 0 }
-        return usage.input_tokens
-            + usage.output_tokens
-            + (usage.cache_creation_input_tokens ?? 0)
-            + (usage.cache_read_input_tokens ?? 0)
+        return usage.input_tokens + usage.output_tokens
     }
 }
 

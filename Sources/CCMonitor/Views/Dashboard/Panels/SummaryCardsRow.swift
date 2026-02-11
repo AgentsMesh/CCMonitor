@@ -9,7 +9,7 @@ struct SummaryCardsRow: View {
             SummaryCard(
                 title: "Today's Cost",
                 value: Formatters.formatCost(appState.dashboardVM.todayCost),
-                subtitle: "\(Formatters.formatTokenCount(appState.dashboardVM.todayTokens)) tokens",
+                subtitle: appState.dashboardVM.todayTokenBreakdown,
                 icon: "dollarsign.circle.fill",
                 color: .blue
             )
