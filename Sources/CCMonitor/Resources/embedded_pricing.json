@@ -1,0 +1,122 @@
+{
+  "claude-sonnet-4-20250514": {
+    "input_cost_per_token": 3e-06,
+    "output_cost_per_token": 1.5e-05,
+    "cache_creation_input_token_cost": 3.75e-06,
+    "cache_read_input_token_cost": 3e-07,
+    "input_cost_per_token_above_200k_tokens": 6e-06,
+    "output_cost_per_token_above_200k_tokens": 2.25e-05,
+    "cache_creation_input_token_cost_above_200k_tokens": 7.5e-06,
+    "cache_read_input_token_cost_above_200k_tokens": 6e-07,
+    "max_tokens": 64000,
+    "max_input_tokens": 1000000,
+    "max_output_tokens": 64000
+  },
+  "anthropic/claude-sonnet-4-20250514": {
+    "input_cost_per_token": 3e-06,
+    "output_cost_per_token": 1.5e-05,
+    "cache_creation_input_token_cost": 3.75e-06,
+    "cache_read_input_token_cost": 3e-07,
+    "input_cost_per_token_above_200k_tokens": 6e-06,
+    "output_cost_per_token_above_200k_tokens": 2.25e-05,
+    "cache_creation_input_token_cost_above_200k_tokens": 7.5e-06,
+    "cache_read_input_token_cost_above_200k_tokens": 6e-07,
+    "max_tokens": 64000,
+    "max_input_tokens": 1000000,
+    "max_output_tokens": 64000
+  },
+  "claude-opus-4-20250514": {
+    "input_cost_per_token": 1.5e-05,
+    "output_cost_per_token": 7.5e-05,
+    "cache_creation_input_token_cost": 1.875e-05,
+    "cache_read_input_token_cost": 1.5e-06,
+    "max_tokens": 32000,
+    "max_input_tokens": 200000,
+    "max_output_tokens": 32000
+  },
+  "anthropic/claude-opus-4-20250514": {
+    "input_cost_per_token": 1.5e-05,
+    "output_cost_per_token": 7.5e-05,
+    "cache_creation_input_token_cost": 1.875e-05,
+    "cache_read_input_token_cost": 1.5e-06,
+    "max_tokens": 32000,
+    "max_input_tokens": 200000,
+    "max_output_tokens": 32000
+  },
+  "claude-3-5-sonnet-20241022": {
+    "input_cost_per_token": 3e-06,
+    "output_cost_per_token": 1.5e-05,
+    "cache_creation_input_token_cost": 3.75e-06,
+    "cache_read_input_token_cost": 3e-07,
+    "input_cost_per_token_above_200k_tokens": 6e-06,
+    "output_cost_per_token_above_200k_tokens": 3e-05,
+    "cache_creation_input_token_cost_above_200k_tokens": 7.5e-06,
+    "cache_read_input_token_cost_above_200k_tokens": 6e-07,
+    "max_tokens": 8192,
+    "max_input_tokens": 1000000,
+    "max_output_tokens": 8192
+  },
+  "anthropic/claude-3-5-sonnet-20241022": {
+    "input_cost_per_token": 3e-06,
+    "output_cost_per_token": 1.5e-05,
+    "cache_creation_input_token_cost": 3.75e-06,
+    "cache_read_input_token_cost": 3e-07,
+    "input_cost_per_token_above_200k_tokens": 6e-06,
+    "output_cost_per_token_above_200k_tokens": 3e-05,
+    "cache_creation_input_token_cost_above_200k_tokens": 7.5e-06,
+    "cache_read_input_token_cost_above_200k_tokens": 6e-07,
+    "max_tokens": 8192,
+    "max_input_tokens": 1000000,
+    "max_output_tokens": 8192
+  },
+  "claude-3-5-haiku-20241022": {
+    "input_cost_per_token": 8e-07,
+    "output_cost_per_token": 4e-06,
+    "cache_creation_input_token_cost": 1e-06,
+    "cache_read_input_token_cost": 8e-08,
+    "max_tokens": 8192,
+    "max_input_tokens": 200000,
+    "max_output_tokens": 8192
+  },
+  "anthropic/claude-3-5-haiku-20241022": {
+    "input_cost_per_token": 8e-07,
+    "output_cost_per_token": 4e-06,
+    "cache_creation_input_token_cost": 1e-06,
+    "cache_read_input_token_cost": 8e-08,
+    "max_tokens": 8192,
+    "max_input_tokens": 200000,
+    "max_output_tokens": 8192
+  },
+  "claude-3-opus-20240229": {
+    "input_cost_per_token": 1.5e-05,
+    "output_cost_per_token": 7.5e-05,
+    "max_tokens": 4096,
+    "max_input_tokens": 200000,
+    "max_output_tokens": 4096
+  },
+  "anthropic/claude-3-opus-20240229": {
+    "input_cost_per_token": 1.5e-05,
+    "output_cost_per_token": 7.5e-05,
+    "max_tokens": 4096,
+    "max_input_tokens": 200000,
+    "max_output_tokens": 4096
+  },
+  "claude-opus-4-6-20250610": {
+    "input_cost_per_token": 1.5e-05,
+    "output_cost_per_token": 7.5e-05,
+    "cache_creation_input_token_cost": 1.875e-05,
+    "cache_read_input_token_cost": 1.5e-06,
+    "max_tokens": 32000,
+    "max_input_tokens": 200000,
+    "max_output_tokens": 32000
+  },
+  "anthropic/claude-opus-4-6-20250610": {
+    "input_cost_per_token": 1.5e-05,
+    "output_cost_per_token": 7.5e-05,
+    "cache_creation_input_token_cost": 1.875e-05,
+    "cache_read_input_token_cost": 1.5e-06,
+    "max_tokens": 32000,
+    "max_input_tokens": 200000,
+    "max_output_tokens": 32000
+  }
+}

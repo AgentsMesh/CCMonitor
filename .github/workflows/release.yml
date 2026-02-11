@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+
+      - name: Build release
+        run: ./scripts/build-app.sh release
+
+      - name: Zip app bundle
+        run: |
+          cd build
+          zip -r CCMonitor.app.zip CCMonitor.app
+
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: CCMonitor ${{ steps.version.outputs.VERSION }}
+          body: |
+            ## CCMonitor ${{ steps.version.outputs.VERSION }}
+
+            ### Installation
+            1. Download `CCMonitor.app.zip` below
+            2. Unzip and move `CCMonitor.app` to `/Applications/`
+            3. Launch from `/Applications/` (required for Launch at Login)
+
+            ### Requirements
+            - macOS 14.0 (Sonoma) or later
+          files: build/CCMonitor.app.zip
+          draft: false
+          prerelease: false
