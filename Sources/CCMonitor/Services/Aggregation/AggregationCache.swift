@@ -187,10 +187,14 @@ enum AggregationCache {
             aggregator.restoreSeenHashes(Set(snapshot.seenHashes))
 
             // 恢复今日聚合 (从 daily 中提取今日数据)
+            // 注意：快照可能是昨天保存的，只有当 daily 中有"今天"的数据才恢复
             let todayStr = formatter.string(from: Date())
             if let todaySummary = snapshot.dailyUsage[todayStr] {
                 aggregator.todayUsage = todaySummary.toUsageSummary()
+            } else {
+                aggregator.todayUsage = .empty
             }
+            aggregator.syncTodayDate()
 
             logger.info("Restored aggregation snapshot: \(snapshot.totalRequests) requests, $\(String(format: "%.2f", snapshot.totalCostUSD)), \(snapshot.seenHashes.count) dedup hashes")
             return true

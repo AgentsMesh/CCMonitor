@@ -56,6 +56,9 @@ final class UsageAggregator: @unchecked Sendable {
     func process(entries: [UsageEntry], costs: [Double], filePath: String) {
         guard entries.count == costs.count else { return }
 
+        // 在处理新条目前检查跨天重置，避免将新一天的数据累加到昨天的 todayUsage 上
+        resetTodayIfNeeded()
+
         for (entry, cost) in zip(entries, costs) {
             processSingleEntry(entry, cost: cost, filePath: filePath)
         }
@@ -177,9 +180,34 @@ final class UsageAggregator: @unchecked Sendable {
         sessions.values.filter { $0.status == .active }.count
     }
 
+    // MARK: - 跨天重置
+
+    /// todayUsage 当前对应的自然日 (当前时区 startOfDay)
+    private var todayDate: Date = Calendar.current.startOfDay(for: Date())
+
+    /// 同步 todayDate 到当前自然日 (供缓存恢复后调用)
+    func syncTodayDate() {
+        todayDate = Calendar.current.startOfDay(for: Date())
+    }
+
+    /// 检测并执行跨天重置：将 todayUsage 重建为当天的 dailyUsage 数据
+    /// 该方法可安全地多次调用，仅在自然日发生变化时执行重置
+    private func resetTodayIfNeeded(now: Date = Date()) {
+        let currentStartOfDay = Calendar.current.startOfDay(for: now)
+        guard currentStartOfDay != todayDate else { return }
+
+        let todayBucket = DateBucket.day(from: now)
+        todayUsage = dailyUsage[todayBucket] ?? .empty
+        todayDate = currentStartOfDay
+        Self.logger.info("Day changed, todayUsage reset from dailyUsage")
+    }
+
     /// 清理过期数据
     func pruneOldData() {
         let now = Date()
+
+        // 跨天重置 todayUsage
+        resetTodayIfNeeded(now: now)
 
         // 清理超过 60 分钟的分钟级数据
         minuteUsage = minuteUsage.filter { key, _ in
@@ -205,6 +233,7 @@ final class UsageAggregator: @unchecked Sendable {
     /// 重置所有数据
     func reset() {
         todayUsage = .empty
+        todayDate = Calendar.current.startOfDay(for: Date())
         hourlyUsage = [:]
         dailyUsage = [:]
         minuteUsage = [:]
