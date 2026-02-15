@@ -224,6 +224,11 @@ final class UsageAggregator: @unchecked Sendable {
             now.timeIntervalSince(key.date) < 30 * 86400
         }
 
+        // 刷新所有 session 状态（基于当前时间重新计算 active/idle/dead）
+        for key in sessions.keys {
+            sessions[key]?.updateStatus()
+        }
+
         // 清理死亡 sessions
         sessions = sessions.filter { _, session in
             session.status != .dead
