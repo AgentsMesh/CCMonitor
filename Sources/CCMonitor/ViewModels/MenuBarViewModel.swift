@@ -46,9 +46,11 @@ final class MenuBarViewModel {
         activeSessions = aggregator.activeSessionCount
         burnRate = BurnRateCalculator.calculate(minuteUsage: aggregator.minuteUsage)
 
-        // 找到使用最多的模型
-        if let top = aggregator.modelUsage.max(by: { $0.value.requestCount < $1.value.requestCount }) {
+        // 今日使用最多的模型
+        if let top = today.modelDistribution.max(by: { $0.value < $1.value }) {
             topModel = top.key
+        } else {
+            topModel = "N/A"
         }
     }
 }
