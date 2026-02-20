@@ -58,4 +58,32 @@ enum Constants {
     // MARK: - 聚合
 
     static let burnRateWindowMinutes: Int = 30
+
+    // MARK: - 时间窗口
+
+    /// 粒度切换阈值（秒）
+    static let granularityMinuteThreshold: TimeInterval = 2 * 3600        // ≤ 2h → minute
+    static let granularityHourlyThreshold: TimeInterval = 3 * 24 * 3600   // ≤ 3d → hourly, > 3d → daily
+
+    /// 窗口缩放极限（秒）
+    static let timeWindowMinDuration: TimeInterval = 10 * 60              // 10 分钟
+    static let timeWindowMaxDuration: TimeInterval = 30 * 24 * 3600       // 30 天
+
+    /// 默认窗口宽度（秒）
+    static let timeWindowDefaultDuration: TimeInterval = 6 * 3600         // 6 小时
+
+    /// 缩放步进因子（滚轮 deltaY=1 时）
+    static let zoomStepFactor: Double = 0.15
+
+    /// 滚轮灵敏度缩放系数
+    static let scrollWheelSensitivity: Double = 1.0
+
+    /// 预设窗口列表 (label, 秒数)
+    static let timeWindowPresets: [(label: String, duration: TimeInterval)] = [
+        ("1H",  3600),
+        ("6H",  6 * 3600),
+        ("1D",  24 * 3600),
+        ("7D",  7 * 24 * 3600),
+        ("30D", 30 * 24 * 3600),
+    ]
 }

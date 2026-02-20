@@ -16,20 +16,26 @@ struct DashboardView: View {
                     // 时间序列图表
                     TimeSeriesPanel()
                         .frame(minHeight: 350)
+                        .clipped()
 
                     // 模型分布
                     ModelDistributionPanel()
                         .frame(minWidth: 300, maxWidth: 300, minHeight: 350)
+                        .clipped()
                 }
+                .fixedSize(horizontal: false, vertical: true)
 
                 // 底部: 项目 + 预算（横向排列）
                 HStack(alignment: .top, spacing: 16) {
                     ProjectPanel()
                         .frame(minHeight: 250)
+                        .clipped()
 
                     BudgetPanel()
                         .frame(minWidth: 300, maxWidth: 300, minHeight: 250)
+                        .clipped()
                 }
+                .fixedSize(horizontal: false, vertical: true)
             }
             .padding()
         }
